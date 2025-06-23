@@ -1,7 +1,7 @@
 ﻿using Microsoft.Playwright;
 using Xunit;
 
-namespace testing_polymer_shop_with_playwright
+namespace testing_polymer_shop_with_playwright.Tests
 {
     public class SimpleTest
     {
