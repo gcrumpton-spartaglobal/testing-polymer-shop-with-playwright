@@ -13,9 +13,11 @@ namespace testing_polymer_shop_with_playwright.Tests
             using var playwright = await Playwright.CreateAsync();
             var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
             var page = new HomePage(await browser.NewPageAsync());
+
             // Act
             await page.GotoAsync();
             var title = await page.TitleAsync();
+
             // Assert
             Assert.Equal("Home - SHOP", title);
         }
