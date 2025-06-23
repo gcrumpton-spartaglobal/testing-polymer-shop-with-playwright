@@ -22,5 +22,10 @@ namespace testing_polymer_shop_with_playwright.Pages
         {
             return await _page.TitleAsync();
         }
+
+        public async Task ClickShopHomeAsync()
+        {
+            await _shopHome.ClickAsync();
+        }
     }
 }
