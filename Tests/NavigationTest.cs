@@ -27,7 +27,8 @@ namespace testing_polymer_shop_with_playwright.Tests
         public async Task CheckHomePageTitle()
         {
             // Arrange
-            var page = new HomePage(await Browser.NewPageAsync());
+            var context = await Browser.NewContextAsync();
+            var page = new HomePage(await context.NewPageAsync());
 
             // Act
             await page.GotoAsync();
@@ -41,7 +42,8 @@ namespace testing_polymer_shop_with_playwright.Tests
         public async Task CheckClickShopHomeLink()
         {
             // Arrange
-            var page = new HomePage(await Browser.NewPageAsync());
+            var context = await Browser.NewContextAsync();
+            var page = new HomePage(await context.NewPageAsync());
 
             // Act
             await page.GotoAsync();
