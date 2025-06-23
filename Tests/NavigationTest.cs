@@ -1,18 +1,33 @@
 ﻿using Microsoft.Playwright;
 using Xunit;
 using testing_polymer_shop_with_playwright.Pages;
+using Microsoft.Playwright.Xunit;
 
 namespace testing_polymer_shop_with_playwright.Tests
 {
-    public class NavigationTest
+    public class NavigationTest : PageTest
     {
+        // Property to hold the browser instance
+        public IBrowser Browser { get; private set; }
+
+        // Run this method before any tests in the class are run
+        public override async Task InitializeAsync()
+        {
+            await base.InitializeAsync();
+            Browser = await Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
+        }
+
+        // Run this method after all tests in the class have run
+        public override async Task DisposeAsync()
+        {
+            await base.DisposeAsync();
+        }
+
         [Fact]
         public async Task CheckHomePageTitle()
         {
             // Arrange
-            using var playwright = await Playwright.CreateAsync();
-            var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
-            var page = new HomePage(await browser.NewPageAsync());
+            var page = new HomePage(await Browser.NewPageAsync());
 
             // Act
             await page.GotoAsync();
@@ -26,9 +41,7 @@ namespace testing_polymer_shop_with_playwright.Tests
         public async Task CheckClickShopHomeLink()
         {
             // Arrange
-            using var playwright = await Playwright.CreateAsync();
-            var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
-            var page = new HomePage(await browser.NewPageAsync());
+            var page = new HomePage(await Browser.NewPageAsync());
 
             // Act
             await page.GotoAsync();
