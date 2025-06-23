@@ -21,5 +21,22 @@ namespace testing_polymer_shop_with_playwright.Tests
             // Assert
             Assert.Equal("Home - SHOP", title);
         }
+
+        [Fact]
+        public async Task CheckClickShopHomeLink()
+        {
+            // Arrange
+            using var playwright = await Playwright.CreateAsync();
+            var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
+            var page = new HomePage(await browser.NewPageAsync());
+
+            // Act
+            await page.GotoAsync();
+            await page.ClickShopHomeAsync();
+            var title = await page.TitleAsync();
+
+            // Assert
+            Assert.Equal("Home - SHOP", title);
+        }
     }
 }
