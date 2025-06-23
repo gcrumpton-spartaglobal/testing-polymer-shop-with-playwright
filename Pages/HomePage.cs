@@ -10,5 +10,10 @@ namespace testing_polymer_shop_with_playwright.Pages
         {
             _page = page;
         }
+
+        public async Task GotoAsync()
+        {
+            await _page.GotoAsync("https://shop.polymer-project.org/");
+        }
     }
 }
