@@ -91,5 +91,26 @@ namespace testing_polymer_shop_with_playwright.Tests
             // Assert
             Assert.Equal("Your cart - SHOP", title);
         }
+
+        [Theory]
+        [InlineData("Men's Outerwear Shop Now")]
+        [InlineData("Ladies Outerwear Shop Now")]
+        [InlineData("Men's T-Shirts Shop Now")]
+        [InlineData("Ladies T-Shirts Shop Now")]
+        public async Task CheckClickShopNowButton(string ariaLabelText)
+        {
+            // Arrange
+            var context = await Browser.NewContextAsync();
+            var page = new HomePage(await context.NewPageAsync());
+
+            // Act
+            await page.GotoAsync();
+            await page.ClickShopNowButtonAsync(ariaLabelText);
+            await Task.Delay(1000); // Wait for navigation to complete
+            var title = await page.TitleAsync();
+
+            // Assert
+            Assert.Contains(ariaLabelText.Replace("Shop Now", ""), title);
+        }
     }
 }
