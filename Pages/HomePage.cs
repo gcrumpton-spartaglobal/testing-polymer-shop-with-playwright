@@ -10,6 +10,7 @@ namespace testing_polymer_shop_with_playwright.Pages
         private readonly ILocator _ladiesOuterwearNavBarLink;
         private readonly ILocator _mensTShirtsNavBarLink;
         private readonly ILocator _ladiesTShirtsNavBarLink;
+        private readonly ILocator _shoppingCartIcon;
 
         public HomePage(IPage page)
         {
@@ -19,6 +20,7 @@ namespace testing_polymer_shop_with_playwright.Pages
             _ladiesOuterwearNavBarLink = _page.Locator("#tabContainer").GetByRole(AriaRole.Link, new() { Name = "Ladies Outerwear" });
             _mensTShirtsNavBarLink = _page.Locator("#tabContainer").GetByRole(AriaRole.Link, new() { Name = "Men's T-Shirts" });
             _ladiesTShirtsNavBarLink = _page.Locator("#tabContainer").GetByRole(AriaRole.Link, new() { Name = "Ladies T-Shirts" });
+            _shoppingCartIcon = _page.Locator("paper-icon-button[icon='shopping-cart']");
         }
 
         public async Task GotoAsync()
@@ -59,6 +61,11 @@ namespace testing_polymer_shop_with_playwright.Pages
                 default:
                     throw new ArgumentException($"No navigation link found for: {navBarOptionText}", nameof(navBarOptionText));
             }
+        }
+
+        public async Task ClickShoppingCartIconAsync()
+        {
+            await _shoppingCartIcon.ClickAsync();
         }
     }
 }

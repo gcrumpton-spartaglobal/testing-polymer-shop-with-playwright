@@ -74,5 +74,22 @@ namespace testing_polymer_shop_with_playwright.Tests
             // Assert
             Assert.Contains(navBarOptionText, title);
         }
+
+        [Fact]
+        public async Task CheckClickShoppingCartIcon()
+        {
+            // Arrange
+            var context = await Browser.NewContextAsync();
+            var page = new HomePage(await context.NewPageAsync());
+
+            // Act
+            await page.GotoAsync();
+            await page.ClickShoppingCartIconAsync();
+            await Task.Delay(1000); // Wait for navigation to complete
+            var title = await page.TitleAsync();
+
+            // Assert
+            Assert.Equal("Your cart - SHOP", title);
+        }
     }
 }
