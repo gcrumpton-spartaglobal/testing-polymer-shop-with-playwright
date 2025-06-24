@@ -54,8 +54,12 @@ namespace testing_polymer_shop_with_playwright.Tests
             Assert.Equal("Home - SHOP", title);
         }
 
-        [Fact]
-        public async Task CheckClickMensOuterwearNavBarLink()
+        [Theory]
+        [InlineData("Men's Outerwear")]
+        [InlineData("Ladies Outerwear")]
+        [InlineData("Men's T-Shirts")]
+        [InlineData("Ladies T-Shirts")]
+        public async Task CheckClickNavBarLink(string navBarOptionText)
         {
             // Arrange
             var context = await Browser.NewContextAsync();
@@ -63,63 +67,12 @@ namespace testing_polymer_shop_with_playwright.Tests
 
             // Act
             await page.GotoAsync();
-            await page.ClickMensOuterwearNavBarLinkAsync();
+            await page.ClickNavBarLinkAsync(navBarOptionText);
             await Task.Delay(1000); // Wait for navigation to complete
             var title = await page.TitleAsync();
 
             // Assert
-            Assert.Equal("Men's Outerwear - SHOP", title);
-        }
-
-        [Fact]
-        public async Task CheckClickLadiesOuterwearNavBarLink()
-        {
-            // Arrange
-            var context = await Browser.NewContextAsync();
-            var page = new HomePage(await context.NewPageAsync());
-
-            // Act
-            await page.GotoAsync();
-            await page.ClickLadiesOuterwearNavBarLinkAsync();
-            await Task.Delay(1000); // Wait for navigation to complete
-            var title = await page.TitleAsync();
-
-            // Assert
-            Assert.Equal("Ladies Outerwear - SHOP", title);
-        }
-
-        [Fact]
-        public async Task CheckMensTShirtsNavBarLink()
-        {
-            // Arrange
-            var context = await Browser.NewContextAsync();
-            var page = new HomePage(await context.NewPageAsync());
-
-            // Act
-            await page.GotoAsync();
-            await page.ClickMensTShirtsNavBarLinkAsync();
-            await Task.Delay(1000); // Wait for navigation to complete
-            var title = await page.TitleAsync();
-
-            // Assert
-            Assert.Equal("Men's T-Shirts - SHOP", title);
-        }
-
-        [Fact]
-        public async Task CheckLadiesTShirtsNavBarLink()
-        {
-            // Arrange
-            var context = await Browser.NewContextAsync();
-            var page = new HomePage(await context.NewPageAsync());
-
-            // Act
-            await page.GotoAsync();
-            await page.ClickLadiesTShirtsNavBarLinkAsync();
-            await Task.Delay(1000); // Wait for navigation to complete
-            var title = await page.TitleAsync();
-
-            // Assert
-            Assert.Equal("Ladies T-Shirts - SHOP", title);
+            Assert.Contains(navBarOptionText, title);
         }
     }
 }

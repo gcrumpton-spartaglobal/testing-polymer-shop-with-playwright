@@ -36,24 +36,29 @@ namespace testing_polymer_shop_with_playwright.Pages
             await _shopHome.ClickAsync();
         }
 
-        public async Task ClickMensOuterwearNavBarLinkAsync()
+        public async Task ClickNavBarLinkAsync(string navBarOptionText)
         {
-            await _mensOuterwearNavBarLink.ClickAsync();
-        }
+            switch (navBarOptionText)
+            {
+                case "Men's Outerwear":
+                    await _mensOuterwearNavBarLink.ClickAsync();
+                    break;
 
-        public async Task ClickLadiesOuterwearNavBarLinkAsync()
-        {
-            await _ladiesOuterwearNavBarLink.ClickAsync();
-        }
+                case "Ladies Outerwear":
+                    await _ladiesOuterwearNavBarLink.ClickAsync();
+                    break;
 
-        public async Task ClickMensTShirtsNavBarLinkAsync()
-        {
-            await _mensTShirtsNavBarLink.ClickAsync();
-        }
+                case "Men's T-Shirts":
+                    await _mensTShirtsNavBarLink.ClickAsync();
+                    break;
 
-        public async Task ClickLadiesTShirtsNavBarLinkAsync()
-        {
-            await _ladiesTShirtsNavBarLink.ClickAsync();
+                case "Ladies T-Shirts":
+                    await _ladiesTShirtsNavBarLink.ClickAsync();
+                    break;
+
+                default:
+                    throw new ArgumentException($"No navigation link found for: {navBarOptionText}", nameof(navBarOptionText));
+            }
         }
     }
 }
