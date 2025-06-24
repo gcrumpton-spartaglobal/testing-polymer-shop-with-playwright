@@ -8,6 +8,7 @@ namespace testing_polymer_shop_with_playwright.Pages
         private readonly ILocator _shopHome;
         private readonly ILocator _mensOuterwearNavBarLink;
         private readonly ILocator _ladiesOuterwearNavBarLink;
+        private readonly ILocator _mensTShirtsNavBarLink;
 
         public HomePage(IPage page)
         {
@@ -15,6 +16,7 @@ namespace testing_polymer_shop_with_playwright.Pages
             _shopHome = _page.GetByRole(AriaRole.Link, new() { Name = "SHOP home" });
             _mensOuterwearNavBarLink = _page.Locator("#tabContainer").GetByRole(AriaRole.Link, new() { Name = "Men's Outerwear" });
             _ladiesOuterwearNavBarLink = _page.Locator("#tabContainer").GetByRole(AriaRole.Link, new() { Name = "Ladies Outerwear" });
+            _mensTShirtsNavBarLink = _page.Locator("#tabContainer").GetByRole(AriaRole.Link, new() { Name = "Men's T-Shirts" });
         }
 
         public async Task GotoAsync()
@@ -40,6 +42,11 @@ namespace testing_polymer_shop_with_playwright.Pages
         public async Task ClickLadiesOuterwearNavBarLinkAsync()
         {
             await _ladiesOuterwearNavBarLink.ClickAsync();
+        }
+
+        public async Task ClickMensTShirtsNavBarLinkAsync()
+        {
+            await _mensTShirtsNavBarLink.ClickAsync();
         }
     }
 }

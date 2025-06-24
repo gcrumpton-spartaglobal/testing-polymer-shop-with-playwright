@@ -87,5 +87,22 @@ namespace testing_polymer_shop_with_playwright.Tests
             // Assert
             Assert.Equal("Ladies Outerwear - SHOP", title);
         }
+
+        [Fact]
+        public async Task CheckMensTShirtsNavBarLink()
+        {
+            // Arrange
+            var context = await Browser.NewContextAsync();
+            var page = new HomePage(await context.NewPageAsync());
+
+            // Act
+            await page.GotoAsync();
+            await page.ClickMensTShirtsNavBarLinkAsync();
+            await Task.Delay(1000); // Wait for navigation to complete
+            var title = await page.TitleAsync();
+
+            // Assert
+            Assert.Equal("Men's T-Shirts - SHOP", title);
+        }
     }
 }
