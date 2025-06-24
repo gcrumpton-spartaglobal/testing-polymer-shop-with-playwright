@@ -1,4 +1,5 @@
 ﻿using Microsoft.Playwright;
+using static Microsoft.Playwright.Assertions;
 
 namespace testing_polymer_shop_with_playwright.Pages
 {
@@ -44,6 +45,11 @@ namespace testing_polymer_shop_with_playwright.Pages
         public async Task ClickShopHomeAsync()
         {
             await _shopHome.ClickAsync();
+        }
+
+        public async Task WaitForTitleAsync(string expectedTitle)
+        {
+            await Expect(_page).ToHaveTitleAsync(expectedTitle);
         }
 
         public async Task ClickNavBarLinkAsync(string navBarOptionText)

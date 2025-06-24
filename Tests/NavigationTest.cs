@@ -68,7 +68,7 @@ namespace testing_polymer_shop_with_playwright.Tests
             // Act
             await page.GotoAsync();
             await page.ClickNavBarLinkAsync(navBarOptionText);
-            await Task.Delay(1000); // Wait for navigation to complete
+            await page.WaitForTitleAsync(navBarOptionText + " - SHOP");
             var title = await page.TitleAsync();
 
             // Assert
@@ -85,7 +85,7 @@ namespace testing_polymer_shop_with_playwright.Tests
             // Act
             await page.GotoAsync();
             await page.ClickShoppingCartIconAsync();
-            await Task.Delay(1000); // Wait for navigation to complete
+            await page.WaitForTitleAsync("Your cart - SHOP");
             var title = await page.TitleAsync();
 
             // Assert
@@ -102,15 +102,16 @@ namespace testing_polymer_shop_with_playwright.Tests
             // Arrange
             var context = await Browser.NewContextAsync();
             var page = new HomePage(await context.NewPageAsync());
+            var pageNameText = ariaLabelText.Replace("Shop Now", "");
 
             // Act
             await page.GotoAsync();
             await page.ClickShopNowButtonAsync(ariaLabelText);
-            await Task.Delay(1000); // Wait for navigation to complete
+            await page.WaitForTitleAsync(pageNameText + " - SHOP");
             var title = await page.TitleAsync();
 
             // Assert
-            Assert.Contains(ariaLabelText.Replace("Shop Now", ""), title);
+            Assert.Contains(pageNameText, title);
         }
     }
 }
